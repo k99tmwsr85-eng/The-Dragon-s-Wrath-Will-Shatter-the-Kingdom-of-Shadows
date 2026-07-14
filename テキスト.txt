@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Dragon's Wrath - 公式サイト</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background-color: #0d0c10;
+    }
+    .font-epic {
+      font-family: 'Cinzel', serif;
+    }
+    /* 炎の余韻を表現する微細なアニメーション */
+    @keyframes slow-pulse {
+      0%, 100% { opacity: 0.15; }
+      50% { opacity: 0.25; }
+    }
+    .ambient-glow {
+      animation: slow-pulse 8s infinite ease-in-out;
+    }
+    /* マイクラライクなシャープで美しいブロックカードのホバーエフェクト */
+    .mc-card {
+      transition: transform 0.2s cubic-bezier(0, 0, 0.2, 1), border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .mc-card:hover {
+      transform: translateY(-4px);
+      border-color: #ef4444;
+      box-shadow: 0 10px 20px -10px rgba(239, 68, 68, 0.3);
+    }
+    /* スクロールバー */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0d0c10;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #3730a3;
+      border: 2px solid #0d0c10;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #4f46e5;
+    }
+  </style>
+</head>
+<body class="text-stone-200 antialiased selection:bg-indigo-600 selection:text-white">
+
+  <!-- 配信終了および既存ユーザー向けお知らせ（トップ最上部固定） -->
+  <div class="bg-gradient-to-r from-red-950 via-stone-900 to-red-950 border-b border-red-700/40 text-stone-200 text-center py-3 px-4 text-xs md:text-sm font-medium sticky top-0 z-[100] backdrop-blur-md shadow-md">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center gap-2 md:gap-6">
+      <div class="flex items-center gap-2">
+        <span class="bg-red-600 text-white text-[10px] font-black px-1.5 py-0.5 rounded uppercase">NOTICE</span>
+        <span class="font-bold">本作は2021年9月14日をもって新規配信（販売）を終了いたしました。</span>
+      </div>
+      <span class="hidden md:inline text-stone-500">|</span>
+      <p class="text-stone-300 text-xs">
+        購入済みのプレイヤー様は、現在もライブラリから<span class="text-red-400 font-bold">再ダウンロード・オンラインプレイが可能</span>です。
+      </p>
+    </div>
+  </div>
+
+  <!-- マインクラフトライクな構造化ヘッダー -->
+  <header class="w-full bg-stone-950/95 border-b border-stone-800/80 sticky top-[45px] md:top-[52px] z-50 backdrop-blur-sm">
+    <div class="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between h-16">
+      <!-- ロゴ -->
+      <a href="#" class="flex items-center space-x-3 group">
+        <div class="w-8 h-8 bg-gradient-to-br from-red-600 to-indigo-700 rounded-lg flex items-center justify-center shadow-lg shadow-indigo-900/30">
+          <i class="fa-solid fa-dragon text-white text-sm"></i>
+        </div>
+        <span class="text-lg md:text-xl font-epic font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-stone-100 to-stone-400 group-hover:from-white group-hover:to-red-400 transition-all">
+          DRAGON'S WRATH
+        </span>
+      </a>
+
+      <!-- メインナビゲーション -->
+      <nav class="hidden lg:flex items-center space-x-8 text-xs font-bold tracking-widest uppercase">
+        <a href="#news" class="text-stone-300 hover:text-red-400 transition-colors">ニュース & パッチ</a>
+        <a href="#about" class="text-stone-300 hover:text-red-400 transition-colors">ゲームプレイ</a>
+        <a href="#characters" class="text-stone-300 hover:text-red-400 transition-colors">キャラクター</a>
+        <a href="#skins" class="text-stone-300 hover:text-red-400 transition-colors">スキン</a>
+        <a href="#support" class="text-stone-300 hover:text-red-400 transition-colors">サポートハブ</a>
+      </nav>
+
+      <!-- サーバー状況 & 再DLガイドリンク -->
+      <div class="flex items-center space-x-4">
+        <span class="hidden sm:inline-flex items-center gap-1.5 text-[10px] font-bold text-emerald-400 bg-emerald-950/50 border border-emerald-900/30 px-2.5 py-1 rounded font-mono">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          SERVER ONLINE
+        </span>
+        <a href="#support" class="bg-indigo-700 hover:bg-indigo-600 text-white font-bold text-xs px-4 py-2 rounded shadow transition-all tracking-wide">
+          再ダウンロード方法
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ヒーローセクション (大迫力ビジュアル) -->
+  <section class="relative min-h-[80vh] flex flex-col justify-center bg-stone-950 overflow-hidden px-4 md:px-8 py-16">
+    <!-- 背景に漂う邪竜の眼光グロー -->
+    <div class="absolute inset-0 bg-radial-gradient bg-gradient-to-tr from-transparent via-red-950/10 to-indigo-950/20 z-0"></div>
+    <div class="absolute right-0 top-0 w-full md:w-1/2 h-full bg-gradient-to-l from-red-900/10 to-transparent blur-3xl ambient-glow z-0"></div>
+
+    <div class="max-w-7xl mx-auto w-full z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <!-- 左：ゲーム概要 -->
+      <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+        <div class="inline-flex items-center space-x-2 bg-stone-900/80 border border-stone-800 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wider text-stone-400">
+          <i class="fa-solid fa-gamepad text-indigo-500"></i>
+          <span>マルチプレイ・ステルスサバイバル</span>
+        </div>
+
+        <h1 class="font-epic select-none leading-none">
+          <span class="block text-4xl sm:text-6xl md:text-7.5xl font-black text-white tracking-tight drop-shadow-xl">
+            The <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-indigo-500">Dragon's</span> Wrath
+          </span>
+          <span class="block text-stone-400 text-sm sm:text-lg md:text-xl font-bold tracking-widest mt-3 uppercase font-sans">
+            影の王国の崩壊と、100匹のビーンズたち
+          </span>
+        </h1>
+
+        <p class="text-stone-400 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto lg:mx-0">
+          火山弾が降り注ぎ、すべてを焼き尽くす邪竜「Wrath」の視線が行き交う。コントローラーのトリガーを引いて息を潜め、瓦礫の影へ滑り込め。
+          2021年に配信を終了した今でも、既存プレイヤーによるオンラインマッチは絶えず繰り広げられています。
+        </p>
+
+        <!-- プラットフォーム対応ロゴ -->
+        <div class="pt-2 flex flex-wrap justify-center lg:justify-start gap-4 text-stone-400 text-xs font-bold tracking-widest uppercase">
+          <span class="flex items-center gap-1.5 bg-stone-900 border border-stone-800/80 px-3 py-1.5 rounded"><i class="fa-brands fa-steam text-white text-sm"></i> Steam</span>
+          <span class="flex items-center gap-1.5 bg-stone-900 border border-stone-800/80 px-3 py-1.5 rounded"><i class="fa-solid fa-gamepad text-red-500 text-sm"></i> Switch</span>
+          <span class="flex items-center gap-1.5 bg-stone-900 border border-stone-800/80 px-3 py-1.5 rounded"><i class="fa-brands fa-playstation text-blue-500 text-sm"></i> PS4</span>
+          <span class="flex items-center gap-1.5 bg-stone-900 border border-stone-800/80 px-3 py-1.5 rounded"><i class="fa-brands fa-xbox text-emerald-500 text-sm"></i> Xbox One</span>
+        </div>
+      </div>
+
+      <!-- 右：ゲームの雰囲気（手前のビーンズ＆奥の邪竜を伝えるグラフィカルコンポーネント） -->
+      <div class="lg:col-span-5 flex justify-center">
+        <div class="relative bg-gradient-to-b from-stone-900/60 to-stone-950/80 border border-stone-800 rounded-3xl p-6 md:p-8 w-full max-w-sm shadow-2xl overflow-hidden group">
+          <!-- 背景装飾 -->
+          <div class="absolute -right-20 -top-20 w-64 h-64 bg-indigo-900/10 rounded-full blur-3xl group-hover:bg-indigo-900/20 transition-all"></div>
+          
+          <div class="relative z-10 flex flex-col justify-between h-full space-y-6">
+            <div class="flex justify-between items-center text-xs font-mono text-stone-500">
+              <span>PROD. ARCHIVE</span>
+              <span>EST. 2019</span>
+            </div>
+
+            <!-- アート再現 -->
+            <div class="py-6 flex flex-col items-center">
+              <div class="text-red-500 text-6xl mb-4 animate-pulse">
+                <i class="fa-solid fa-dragon"></i>
+              </div>
+              <h3 class="text-stone-300 font-bold text-center tracking-wide font-epic">IN-GAME LIVE</h3>
+              <p class="text-stone-500 text-xs text-center mt-1">最大100人でマッチングするステルスバトルロイヤル</p>
+            </div>
+
+            <div class="border-t border-stone-800/60 pt-4 flex justify-between items-center text-xs text-stone-400">
+              <span class="font-bold text-indigo-400"><i class="fa-solid fa-check-double mr-1"></i>新規販売終了</span>
+              <span class="text-stone-500 font-mono">ver.1.4.0 (Final)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ニュース & 過去パッチノート (News Grid Section) -->
+  <section id="news" class="py-20 bg-stone-950 border-t border-stone-900 px-4 md:px-8">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col md:flex-row items-baseline justify-between mb-12 border-b border-stone-800 pb-4">
+        <div>
+          <h2 class="text-2xl md:text-4xl font-black tracking-widest font-epic text-stone-100">
+            NEWS <span class="text-red-500">&</span> PATCHES
+          </h2>
+          <p class="text-stone-500 text-xs md:text-sm mt-1">アップデート履歴、および重要なお知らせのアーカイブ</p>
+        </div>
+        <span class="text-stone-600 text-xs font-mono mt-2 md:mt-0">LAST UPDATE: 2021.09.10</span>
+      </div>
+
+      <!-- マインクラフトライクな最新ニュースグリッド -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- ニュースカード 1 -->
+        <article class="bg-stone-900/40 border border-stone-850 rounded-2xl overflow-hidden flex flex-col justify-between mc-card">
+          <div class="p-6 space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="bg-red-950/50 border border-red-900/30 text-red-400 text-[10px] font-bold px-2.5 py-0.5 rounded">重要なお知らせ</span>
+              <span class="text-xs text-stone-500 font-mono">2021.08.14</span>
+            </div>
+            <h3 class="text-lg font-bold text-stone-200 line-clamp-2 hover:text-red-400 transition-colors">
+              「The Dragon's Wrath」各配信ストアでの新規販売・配信終了に関する詳細
+            </h3>
+            <p class="text-stone-400 text-xs leading-relaxed line-clamp-3">
+              誠に勝手ながら、本作はロードマップ完結に伴い、2021年9月14日をもってすべてのオンライン販売を終了いたします。購入済みユーザー様のサーバー継続状況についてのFAQを掲載しました。
+            </p>
+          </div>
+          <div class="px-6 py-4 border-t border-stone-850/60 flex items-center justify-between text-xs font-bold text-stone-400 hover:text-white transition-colors">
+            <span>詳細を読む</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </div>
+        </article>
+
+        <!-- ニュースカード 2 -->
+        <article class="bg-stone-900/40 border border-stone-850 rounded-2xl overflow-hidden flex flex-col justify-between mc-card">
+          <div class="p-6 space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="bg-indigo-950/50 border border-indigo-900/30 text-indigo-400 text-[10px] font-bold px-2.5 py-0.5 rounded">パッチノート</span>
+              <span class="text-xs text-stone-500 font-mono">2021.09.10</span>
+            </div>
+            <h3 class="text-lg font-bold text-stone-200 line-clamp-2 hover:text-indigo-400 transition-colors">
+              Ver 1.4.0 アップデート「終焉の門（The Gate of Shadows）」配信開始
+            </h3>
+            <p class="text-stone-400 text-xs leading-relaxed line-clamp-3">
+              物語の結末を飾る最終チャプター『終焉の門』が開門。新たな隠れギミック「壊れる城壁アプデ」、及び新規カスタムスキンの無料解放。
+            </p>
+          </div>
+          <div class="px-6 py-4 border-t border-stone-850/60 flex items-center justify-between text-xs font-bold text-stone-400 hover:text-white transition-colors">
+            <span>パッチ詳細を見る</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </div>
+        </article>
+
+        <!-- ニュースカード 3 -->
+        <article class="bg-stone-900/40 border border-stone-850 rounded-2xl overflow-hidden flex flex-col justify-between mc-card">
+          <div class="p-6 space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="bg-stone-850 text-stone-400 text-[10px] font-bold px-2.5 py-0.5 rounded">コミュニティ</span>
+              <span class="text-xs text-stone-500 font-mono">2021.05.20</span>
+            </div>
+            <h3 class="text-lg font-bold text-stone-200 line-clamp-2 hover:text-stone-300 transition-colors">
+              全世界累計プレイヤー数 500万人突破記念！限定「きんピコ」スキン一斉配布
+            </h3>
+            <p class="text-stone-400 text-xs leading-relaxed line-clamp-3">
+              ファンの皆様への感謝を込めて、ログインするだけで全員に金色に輝く特別なスキンが自動付与されます。
+            </p>
+          </div>
+          <div class="px-6 py-4 border-t border-stone-850/60 flex items-center justify-between text-xs font-bold text-stone-400 hover:text-white transition-colors">
+            <span>スキン受け取り方法</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ゲームプレイ特徴 (Game Overview Section) -->
+  <section id="about" class="py-20 bg-stone-900/20 px-4 md:px-8 border-t border-stone-900">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-2xl md:text-4xl font-black tracking-widest font-epic text-stone-200">
+          HOW <span class="text-red-500">TO PLAY</span>
+        </h2>
+        <div class="h-1 w-20 bg-indigo-700 mx-auto mt-4"></div>
+        <p class="text-stone-400 text-sm mt-3">スリルとシュールが入り混じる、独自のステルスルール</p>
+      </div>
+
+      <!-- 特徴グリッド -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- 特徴1 -->
+        <div class="flex gap-4 p-6 bg-stone-900/50 rounded-2xl border border-stone-850">
+          <div class="w-12 h-12 bg-red-950/50 border border-red-900/40 rounded-xl flex items-center justify-center text-red-500 text-xl shrink-0">
+            <i class="fa-solid fa-eye-slash"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-stone-200 text-lg mb-1">邪竜の眼光と火山弾</h3>
+            <p class="text-stone-400 text-xs leading-relaxed">
+              邪竜「Wrath」の目が光ると、その光路にいるものは灰に。さらにランダムに降る火山弾が安全な「物陰」を次々と破壊するため、隠れる場所を常に変える臨機応変さが求められます。
+            </p>
+          </div>
+        </div>
+
+        <!-- 特徴2 -->
+        <div class="flex gap-4 p-6 bg-stone-900/50 rounded-2xl border border-stone-850">
+          <div class="w-12 h-12 bg-indigo-950/50 border border-indigo-900/40 rounded-xl flex items-center justify-center text-indigo-400 text-xl shrink-0">
+            <i class="fa-solid fa-people-arrows"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-stone-200 text-lg mb-1">物陰を奪い合う、100人の生存闘争</h3>
+            <p class="text-stone-400 text-xs leading-relaxed">
+              各遮蔽物に入れる人数には限界があります。友達を後ろから突き落としたり、タックルでスペースを横取りする「コミカルな泥仕合」が発生。最後の1人になるまで生き延びましょう。
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- キャラクター紹介 (Characters Section) -->
+  <section id="characters" class="py-20 bg-stone-950 px-4 md:px-8 border-t border-stone-900">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-2xl md:text-4xl font-black tracking-widest font-epic text-stone-200">
+          THE <span class="text-indigo-500">BEANS</span>
+        </h2>
+        <div class="h-1 w-20 bg-indigo-700 mx-auto mt-4"></div>
+        <p class="text-stone-400 text-sm mt-3">逃げ惑うビーンズたち。各自、特異な（？）かくれんぼ技術を所有</p>
+      </div>
+
+      <!-- キャラクター選択用ミニグリッド -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+        <!-- 赤 -->
+        <button onclick="selectCharacter('red')" class="char-btn border-2 border-red-500 bg-red-950/20 p-4 rounded-xl flex flex-col items-center transition-all focus:outline-none">
+          <svg class="w-10 h-14" viewBox="0 0 100 130">
+            <rect x="25" y="20" width="50" height="90" rx="25" fill="#ef4444" />
+            <ellipse cx="40" cy="50" rx="10" ry="15" fill="#fff" />
+            <ellipse cx="60" cy="50" rx="10" ry="15" fill="#fff" />
+            <circle cx="42" cy="52" r="4" fill="#000" />
+            <circle cx="58" cy="52" r="4" fill="#000" />
+            <ellipse cx="35" cy="115" rx="12" ry="8" fill="#b91c1c" />
+            <ellipse cx="65" cy="115" rx="12" ry="8" fill="#b91c1c" />
+          </svg>
+          <span class="font-bold text-xs text-red-400 mt-2">あかピコ</span>
+        </button>
+        <!-- 青 -->
+        <button onclick="selectCharacter('blue')" class="char-btn border border-stone-800 bg-stone-900/60 p-4 rounded-xl flex flex-col items-center transition-all focus:outline-none hover:border-indigo-500">
+          <svg class="w-10 h-14" viewBox="0 0 100 130">
+            <rect x="25" y="20" width="50" height="90" rx="25" fill="#3b82f6" />
+            <ellipse cx="40" cy="50" rx="10" ry="15" fill="#fff" />
+            <ellipse cx="60" cy="50" rx="10" ry="15" fill="#fff" />
+            <circle cx="42" cy="52" r="4" fill="#000" />
+            <circle cx="58" cy="52" r="4" fill="#000" />
+            <ellipse cx="35" cy="115" rx="12" ry="8" fill="#1d4ed8" />
+            <ellipse cx="65" cy="115" rx="12" ry="8" fill="#1d4ed8" />
+          </svg>
+          <span class="font-bold text-xs text-stone-400 mt-2">あおピコ</span>
+        </button>
+        <!-- 黄 -->
+        <button onclick="selectCharacter('yellow')" class="char-btn border border-stone-800 bg-stone-900/60 p-4 rounded-xl flex flex-col items-center transition-all focus:outline-none hover:border-yellow-500">
+          <svg class="w-10 h-14" viewBox="0 0 100 130">
+            <rect x="25" y="20" width="50" height="90" rx="25" fill="#eab308" />
+            <ellipse cx="40" cy="50" rx="10" ry="15" fill="#fff" />
+            <ellipse cx="60" cy="50" rx="10" ry="15" fill="#fff" />
+            <circle cx="42" cy="52" r="4" fill="#000" />
+            <circle cx="58" cy="52" r="4" fill="#000" />
+            <ellipse cx="35" cy="115" rx="12" ry="8" fill="#a16207" />
+            <ellipse cx="65" cy="115" rx="12" ry="8" fill="#a16207" />
+          </svg>
+          <span class="font-bold text-xs text-stone-400 mt-2">きピコ</span>
+        </button>
+        <!-- 紫 -->
+        <button onclick="selectCharacter('purple')" class="char-btn border border-stone-800 bg-stone-900/60 p-4 rounded-xl flex flex-col items-center transition-all focus:outline-none hover:border-purple-500">
+          <svg class="w-10 h-14" viewBox="0 0 100 130">
+            <rect x="25" y="20" width="50" height="90" rx="25" fill="#a855f7" />
+            <ellipse cx="40" cy="50" rx="10" ry="15" fill="#fff" />
+            <ellipse cx="60" cy="50" rx="10" ry="15" fill="#fff" />
+            <circle cx="42" cy="52" r="4" fill="#000" />
+            <circle cx="58" cy="52" r="4" fill="#000" />
+            <ellipse cx="35" cy="115" rx="12" ry="8" fill="#7e22ce" />
+            <ellipse cx="65" cy="115" rx="12" ry="8" fill="#7e22ce" />
+          </svg>
+          <span class="font-bold text-xs text-stone-400 mt-2">むらピコ</span>
+        </button>
+      </div>
+
+      <!-- ビジュアル詳細カード -->
+      <div id="char-details-container" class="bg-stone-900/60 border border-stone-800 rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-center gap-8">
+        <div id="char-large-preview" class="w-40 h-48 flex items-center justify-center bg-stone-950 rounded-2xl p-4 border border-stone-850"></div>
+        <div class="flex-1 space-y-4 text-center md:text-left">
+          <div class="flex flex-col md:flex-row md:items-baseline gap-2 justify-center md:justify-start">
+            <h3 id="char-name" class="text-2xl md:text-3xl font-black text-red-500">あかピコ</h3>
+            <span id="char-title" class="text-sm text-stone-400 font-bold">得意なかくれんぼ：力技での身代わり</span>
+          </div>
+          <p id="char-desc" class="text-stone-300 text-sm md:text-base leading-relaxed">
+            物陰に隠れる技術よりも、いかに他者を出し抜いて良い影を確保するかに長けた（？）アグレッシブな精霊。そのおてんばな性格から、多くの仲間ビーンズを恐怖に陥れてきた。
+          </p>
+          <div class="grid grid-cols-2 gap-4 max-w-sm mx-auto md:mx-0 pt-2">
+            <div>
+              <span class="block text-xs text-stone-500">かくれんぼ技術 (STEALTH)</span>
+              <div class="w-full bg-stone-950 h-2 rounded-full mt-1 overflow-hidden">
+                <div id="bar-speed" class="bg-red-500 h-full" style="width: 55%"></div>
+              </div>
+            </div>
+            <div>
+              <span class="block text-xs text-stone-500">生存率 (SURVIVAL)</span>
+              <div class="w-full bg-stone-950 h-2 rounded-full mt-1 overflow-hidden">
+                <div id="bar-survival" class="bg-red-500 h-full" style="width: 90%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- スキン着せ替え紹介 (Minecraft Marketplace Style) -->
+  <section id="skins" class="py-20 bg-stone-900/10 px-4 md:px-8 border-t border-stone-900">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-2xl md:text-4xl font-black tracking-widest font-epic text-stone-200">
+          BEANS <span class="text-indigo-500">SKINS</span>
+        </h2>
+        <div class="h-1 w-20 bg-indigo-700 mx-auto mt-4"></div>
+        <p class="text-stone-400 text-sm mt-3">かつてゲーム内で配信された、大人気の特別カスタマイズ衣装</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- スキン 1 -->
+        <div class="bg-stone-950 p-6 rounded-2xl border border-stone-850 flex flex-col items-center text-center group">
+          <div class="w-24 h-24 bg-stone-900 rounded-full flex items-center justify-center border border-stone-800 relative group-hover:scale-105 transition-all">
+            <svg class="w-14 h-18" viewBox="0 0 100 130">
+              <rect x="25" y="20" width="50" height="90" rx="25" fill="#facc15" />
+              <!-- サングラス -->
+              <rect x="30" y="42" width="40" height="10" rx="3" fill="#000" />
+              <ellipse cx="35" cy="115" rx="10" ry="6" fill="#ca8a04" />
+              <ellipse cx="65" cy="115" rx="10" ry="6" fill="#ca8a04" />
+            </svg>
+          </div>
+          <h4 class="font-bold text-stone-200 mt-4">ゴールデン・ピコ</h4>
+          <span class="text-[10px] text-yellow-500 font-bold tracking-widest mt-1">500万DL突破記念特典</span>
+          <p class="text-stone-400 text-xs mt-2 leading-relaxed">
+            全身に純金メッキを施し、眩しすぎる輝きにより逆にドラゴンの目がかすむのではないかと噂された。
+          </p>
+        </div>
+
+        <!-- スキン 2 -->
+        <div class="bg-stone-950 p-6 rounded-2xl border border-stone-850 flex flex-col items-center text-center group">
+          <div class="w-24 h-24 bg-stone-900 rounded-full flex items-center justify-center border border-stone-800 relative group-hover:scale-105 transition-all">
+            <svg class="w-14 h-18" viewBox="0 0 100 130">
+              <rect x="25" y="20" width="50" height="90" rx="25" fill="#10b981" />
+              <!-- ナイトヘルムの模倣 -->
+              <rect x="20" y="10" width="60" height="15" rx="5" fill="#4b5563" />
+              <ellipse cx="35" cy="115" rx="10" ry="6" fill="#047857" />
+              <ellipse cx="65" cy="115" rx="10" ry="6" fill="#047857" />
+            </svg>
+          </div>
+          <h4 class="font-bold text-stone-200 mt-4">インディ・騎士スキン</h4>
+          <span class="text-[10px] text-emerald-500 font-bold tracking-widest mt-1">シーズン2 バトルパス</span>
+          <p class="text-stone-400 text-xs mt-2 leading-relaxed">
+            かぶとを被って防衛体制。かぶと部分だけドラゴンの火山弾に耐えられる（ように見える）おもちゃ。
+          </p>
+        </div>
+
+        <!-- スキン 3 -->
+        <div class="bg-stone-950 p-6 rounded-2xl border border-stone-850 flex flex-col items-center text-center group">
+          <div class="w-24 h-24 bg-stone-900 rounded-full flex items-center justify-center border border-stone-800 relative group-hover:scale-105 transition-all">
+            <svg class="w-14 h-18" viewBox="0 0 100 130">
+              <rect x="25" y="20" width="50" height="90" rx="25" fill="#f43f5e" />
+              <!-- かわいいリボン -->
+              <ellipse cx="50" cy="16" rx="15" ry="8" fill="#db2777" />
+              <ellipse cx="35" cy="115" rx="10" ry="6" fill="#be123c" />
+              <ellipse cx="65" cy="115" rx="10" ry="6" fill="#be123c" />
+            </svg>
+          </div>
+          <h4 class="font-bold text-stone-200 mt-4">あまピコ（デコラ・スキン）</h4>
+          <span class="text-[10px] text-pink-500 font-bold tracking-widest mt-1">バレンタイン・限定</span>
+          <p class="text-stone-400 text-xs mt-2 leading-relaxed">
+            ピンクリボンをあしらった究極に甘くてキュートな姿。どんな過酷な影の王国も一瞬でメルヘンになります。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- サポートハブ / 再DL手順アコーディオン (Support & Specs Section) -->
+  <section id="support" class="py-20 bg-stone-950 px-4 md:px-8 border-t border-stone-900">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-2xl md:text-4xl font-black tracking-widest font-epic text-stone-200">
+          SUPPORT <span class="text-red-500">HUB</span>
+        </h2>
+        <div class="h-1 w-20 bg-indigo-700 mx-auto mt-4"></div>
+        <p class="text-stone-400 text-sm mt-3">すでにゲームを所有しているプレイヤー様向けの再インストールガイド</p>
+      </div>
+
+      <!-- FAQ・サポートアコーディオン -->
+      <div class="space-y-4">
+        <!-- 質問 1 -->
+        <div class="bg-stone-900/40 border border-stone-850 rounded-2xl overflow-hidden">
+          <button onclick="toggleAccordion(1)" class="w-full flex items-center justify-between p-6 text-left focus:outline-none hover:bg-stone-900/60 transition-all">
+            <span class="font-bold text-stone-200 text-sm md:text-base flex items-center gap-2">
+              <i class="fa-brands fa-steam text-white"></i>
+              <span>Steam (PC) での再ダウンロード手順</span>
+            </span>
+            <i id="icon-1" class="fa-solid fa-chevron-down text-stone-500 transition-transform"></i>
+          </button>
+          <div id="answer-1" class="px-6 pb-6 text-xs md:text-sm text-stone-400 leading-relaxed hidden border-t border-stone-850/30 pt-4">
+            <p class="mb-2">一度でもSteamで本作を購入または有効化したことがある場合、ストアページは非表示になっていますが、以下の手順で今も遊べます：</p>
+            <ol class="list-decimal list-inside space-y-1 bg-stone-950 p-4 rounded-xl border border-stone-900 text-stone-300">
+              <li>PCでSteamクライアントを起動します。</li>
+              <li>上部の<strong>「ライブラリ」</strong>タブを開きます。</li>
+              <li>左側のゲームリストの検索窓に<strong>「The Dragon's Wrath」</strong>と入力します。</li>
+              <li>該当ゲームを選択し、<strong>「インストール」</strong>ボタンをクリックするとデータが展開されます。</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- 質問 2 -->
+        <div class="bg-stone-900/40 border border-stone-850 rounded-2xl overflow-hidden">
+          <button onclick="toggleAccordion(2)" class="w-full flex items-center justify-between p-6 text-left focus:outline-none hover:bg-stone-900/60 transition-all">
+            <span class="font-bold text-stone-200 text-sm md:text-base flex items-center gap-2">
+              <i class="fa-solid fa-gamepad text-red-500"></i>
+              <span>Nintendo Switch での再ダウンロード手順</span>
+            </span>
+            <i id="icon-2" class="fa-solid fa-chevron-down text-stone-500 transition-transform"></i>
+          </button>
+          <div id="answer-2" class="px-6 pb-6 text-xs md:text-sm text-stone-400 leading-relaxed hidden border-t border-stone-850/30 pt-4">
+            <p class="mb-2">購入時と同じニンテンドーアカウントをご利用の場合、マイニンテンドーストアの購入履歴より再取得できます：</p>
+            <ol class="list-decimal list-inside space-y-1 bg-stone-950 p-4 rounded-xl border border-stone-900 text-stone-300">
+              <li>HOMEメニューから<strong>「ニンテンドーeショップ」</strong>を起動します。</li>
+              <li>購入したことのあるユーザーアイコン（右上）を選択します。</li>
+              <li>アカウント情報の<strong>「再ダウンロード」</strong>タブを開きます。</li>
+              <li><strong>「The Dragon's Wrath」</strong>を選択し、ダウンロードを行ってください。</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- 質問 3 -->
+        <div class="bg-stone-900/40 border border-stone-850 rounded-2xl overflow-hidden">
+          <button onclick="toggleAccordion(3)" class="w-full flex items-center justify-between p-6 text-left focus:outline-none hover:bg-stone-900/60 transition-all">
+            <span class="font-bold text-stone-200 text-sm md:text-base flex items-center gap-2">
+              <i class="fa-brands fa-playstation text-blue-500"></i>
+              <span>PlayStation 4 での再ダウンロード手順</span>
+            </span>
+            <i id="icon-3" class="fa-solid fa-chevron-down text-stone-500 transition-transform"></i>
+          </button>
+          <div id="answer-3" class="px-6 pb-6 text-xs md:text-sm text-stone-400 leading-relaxed hidden border-t border-stone-850/30 pt-4">
+            <ol class="list-decimal list-inside space-y-1 bg-stone-950 p-4 rounded-xl border border-stone-900 text-stone-300">
+              <li>PS4のHOME画面から右端の<strong>「ライブラリー」</strong>へ進みます。</li>
+              <li>左メニューの<strong>「購入したコンテンツ」</strong>を選択します。</li>
+              <li>ゲームの一覧から<strong>「The Dragon's Wrath」</strong>を探し、ダウンロードを選択してください。</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <!-- 製品詳細テーブル -->
+      <div class="mt-16 bg-stone-900/30 border border-stone-850 p-6 md:p-8 rounded-2xl">
+        <h3 class="font-bold text-stone-200 mb-6 flex items-center gap-2 text-lg">
+          <i class="fa-solid fa-circle-info text-indigo-500"></i>
+          <span>PRODUCT SPECIFICATIONS</span>
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs md:text-sm">
+          <div class="space-y-3">
+            <div class="flex border-b border-stone-800/80 pb-2">
+              <span class="w-32 text-stone-500 font-bold">タイトル</span>
+              <span class="text-stone-300">The Dragon's Wrath</span>
+            </div>
+            <div class="flex border-b border-stone-800/80 pb-2">
+              <span class="w-32 text-stone-500 font-bold">開発元</span>
+              <span class="text-stone-300">Kingdom of Shadows Team</span>
+            </div>
+          </div>
+          <div class="space-y-3">
+            <div class="flex border-b border-stone-800/80 pb-2">
+              <span class="w-32 text-stone-500 font-bold">サービス終了日</span>
+              <span class="text-stone-300">2021年9月14日 (新規配信終了)</span>
+            </div>
+            <div class="flex border-b border-stone-800/80 pb-2">
+              <span class="w-32 text-stone-500 font-bold">オンラインマッチ</span>
+              <span class="text-stone-300">ロビーサーバー稼働中</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- フッター -->
+  <footer class="bg-stone-950 border-t border-stone-900 py-12 px-4 text-center">
+    <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="text-center md:text-left">
+        <span class="text-lg font-epic font-black text-stone-400 tracking-wider block">
+          The Dragon's Wrath
+        </span>
+        <span class="text-xs text-stone-600 mt-1 block">
+          © 2019-2021 Kingdom of Shadows Dev team. 本サイトは、配信終了ゲームの公式アーカイブポータルです。
+        </span>
+      </div>
+      <div class="flex space-x-6 text-stone-600 text-xl">
+        <a href="#" class="hover:text-red-500 transition-colors cursor-not-allowed"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="#" class="hover:text-red-500 transition-colors cursor-not-allowed"><i class="fa-brands fa-youtube"></i></a>
+        <a href="#" class="hover:text-red-500 transition-colors cursor-not-allowed"><i class="fa-brands fa-discord"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // --- キャラクターデータ ---
+    const characterData = {
+      red: {
+        name: 'あかピコ',
+        title: '得意なかくれんぼ：力技での身代わり',
+        desc: '物陰に隠れる技術よりも、いかに他者を出し抜いて良い影を確保するかに長けた（？）アグレッシブな精霊。そのおてんばな性格から、多くの仲間ビーンズを恐怖に陥れてきた。',
+        speed: '55%',
+        survival: '90%',
+        color: '#ef4444',
+        shadowColor: '#b91c1c'
+      },
+      blue: {
+        name: 'あおピコ',
+        title: '得意なかくれんぼ：気配の完全消去（死んだふり）',
+        desc: '計算高い頭脳派ビーンズ。ドラゴンの巡回ルートや火山弾の落下タイミングを精密に計算し、呼吸さえも止めて障害物と一体化する。ただし、計算が外れたときは真っ先に泣き出す。',
+        speed: '95%',
+        survival: '75%',
+        color: '#3b82f6',
+        shadowColor: '#1d4ed8'
+      },
+      yellow: {
+        name: 'きピコ',
+        title: '得意なかくれんぼ：気まぐれで見逃される強運',
+        desc: '一切緊迫感を持たずにポテポテと歩き回る天然ビーンズ。驚異的な強運を持っており、隠れるのを失敗して立ちすくんでいたのにも関わらず、火山弾が勝手にそれて無傷だったりする。',
+        speed: '75%',
+        survival: '85%',
+        color: '#eab308',
+        shadowColor: '#a16207'
+      },
+      purple: {
+        name: 'むらピコ',
+        title: '得意なかくれんぼ：闇夜に同化する暗黒衣',
+        desc: '自称「影の支配者」の中二病ビーンズ。廃墟の影と同化して不敵な笑みを浮かべているが、ドラゴンの本気の咆哮でマントが飛んでいくと普通に叫んで全力ダッシュで逃げ惑う。',
+        speed: '80%',
+        survival: '80%',
+        color: '#a855f7',
+        shadowColor: '#7e22ce'
+      }
+    };
+
+    function selectCharacter(charKey) {
+      const data = characterData[charKey];
+      
+      // ボタンアクティブ更新
+      document.querySelectorAll('.char-btn').forEach(btn => {
+        btn.classList.remove('border-red-500', 'border-indigo-500', 'border-yellow-500', 'border-purple-500', 'bg-red-950/20', 'bg-stone-900/60');
+        btn.classList.add('border-stone-800', 'bg-stone-900/60');
+        btn.querySelector('span').classList.remove('text-red-400', 'text-indigo-400', 'text-yellow-400', 'text-purple-400');
+        btn.querySelector('span').classList.add('text-stone-400');
+      });
+      
+      const activeBtn = event.currentTarget;
+      activeBtn.classList.remove('border-stone-800', 'bg-stone-900/60');
+      
+      // カラーごとのアクティブ枠とテキスト変更
+      if (charKey === 'red') {
+        activeBtn.classList.add('border-red-500', 'bg-red-950/20');
+        activeBtn.querySelector('span').classList.add('text-red-400');
+      } else if (charKey === 'blue') {
+        activeBtn.classList.add('border-indigo-500', 'bg-indigo-950/20');
+        activeBtn.querySelector('span').classList.add('text-indigo-400');
+      } else if (charKey === 'yellow') {
+        activeBtn.classList.add('border-yellow-500', 'bg-yellow-950/20');
+        activeBtn.querySelector('span').classList.add('text-yellow-400');
+      } else if (charKey === 'purple') {
+        activeBtn.classList.add('border-purple-500', 'bg-purple-950/20');
+        activeBtn.querySelector('span').classList.add('text-purple-400');
+      }
+
+      // カード表示更新
+      document.getElementById('char-name').innerText = data.name;
+      document.getElementById('char-name').style.color = data.color;
+      document.getElementById('char-title').innerText = data.title;
+      document.getElementById('char-desc').innerText = data.desc;
+      
+      document.getElementById('bar-speed').style.width = data.speed;
+      document.getElementById('bar-speed').style.backgroundColor = data.color;
+      document.getElementById('bar-survival').style.width = data.survival;
+      document.getElementById('bar-survival').style.backgroundColor = data.color;
+
+      updateLargePreview(data.color, data.shadowColor);
+    }
+
+    function updateLargePreview(color, shadowColor) {
+      const container = document.getElementById('char-large-preview');
+      container.innerHTML = `
+        <svg class="w-28 h-36" viewBox="0 0 100 130">
+          <rect x="25" y="20" width="50" height="90" rx="25" fill="${color}" />
+          <ellipse cx="40" cy="50" rx="10" ry="15" fill="#fff" />
+          <ellipse cx="60" cy="50" rx="10" ry="15" fill="#fff" />
+          <circle cx="42" cy="52" r="4" fill="#000" />
+          <circle cx="58" cy="52" r="4" fill="#000" />
+          <ellipse cx="35" cy="115" rx="12" ry="8" fill="${shadowColor}" />
+          <ellipse cx="65" cy="115" rx="12" ry="8" fill="${shadowColor}" />
+        </svg>
+      `;
+    }
+
+    // アコーディオンの開閉処理
+    function toggleAccordion(id) {
+      const answer = document.getElementById(`answer-${id}`);
+      const icon = document.getElementById(`icon-${id}`);
+      
+      if (answer.classList.contains('hidden')) {
+        answer.classList.remove('hidden');
+        icon.classList.add('rotate-180');
+      } else {
+        answer.classList.add('hidden');
+        icon.classList.remove('rotate-180');
+      }
+    }
+
+    // 初期起動時
+    updateLargePreview('#ef4444', '#b91c1c');
+  </script>
+</body>
+</html>
+
